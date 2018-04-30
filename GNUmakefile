@@ -21,11 +21,13 @@ GOARCH=$(shell go env GOARCH)
 GOPATH=$(shell go env GOPATH)
 
 # Get the git commit
-GIT_COMMIT=$(shell git rev-parse --short HEAD)
-GIT_DIRTY=$(shell test -n "`git status --porcelain`" && echo "+CHANGES" || true)
-GIT_DESCRIBE=$(shell git describe --tags --always)
+GIT_COMMIT?=$(shell git rev-parse --short HEAD)
+GIT_DIRTY?=$(shell test -n "`git status --porcelain`" && echo "+CHANGES" || true)
+GIT_DESCRIBE?=$(shell git describe --tags --always)
 GIT_IMPORT=github.com/hashicorp/consul/version
 GOLDFLAGS=-X $(GIT_IMPORT).GitCommit=$(GIT_COMMIT)$(GIT_DIRTY) -X $(GIT_IMPORT).GitDescribe=$(GIT_DESCRIBE)
+
+CONSUL_DOCKER_IMAGE?=consul-dev
 
 export GOLDFLAGS
 
@@ -122,10 +124,13 @@ ui:
 # changes to the UI assets that aren't checked in.
 static-assets:
 	@go-bindata-assetfs -pkg agent -prefix pkg ./pkg/web_ui/...
-	@mv bindata.go agent/bindata_assetfs.go
+	@mv bindata_assetfs.go agent/
 	$(MAKE) format
 
 tools:
 	go get -u -v $(GOTOOLS)
 
-.PHONY: all ci bin dev dist cov test cover format vet ui static-assets tools vendorfmt
+docker:
+	docker build --build-arg "GIT_COMMIT=$(GIT_COMMIT)" --build-arg "GIT_DESCRIBE=$(GIT_DESCRIBE)" --build-arg "GIT_DIRTY=$(GIT_DIRTY)" -t $(CONSUL_DOCKER_IMAGE) -f docker/Dockerfile .
+	
+.PHONY: all ci bin dev dist cov test cover format vet ui static-assets tools vendorfmt docker
