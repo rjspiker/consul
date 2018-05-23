@@ -1,0 +1,27 @@
+/* Gradient Backgrounds */
+%gradient-bg {
+  background: linear-gradient(to right, #1c96fc, #166efd);
+  position: relative;
+  overflow: hidden;
+  color: white;
+
+  &::before {
+    content: '';
+    width: 1440px;
+    height: 470px;
+    background: linear-gradient(to right, #1dacfc, #1567fe);
+    position: absolute;
+    bottom: -144px;
+    right: -470px;
+    transform: skewY(-30deg);
+  }
+
+  & .content {
+    position: relative;
+    z-index: 2;
+  }
+
+  & .g-container {
+    position: relative;
+  }
+}

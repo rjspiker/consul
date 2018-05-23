@@ -1,0 +1,36 @@
+.g-form {
+  & .field {
+    display: flex;
+    flex-direction: column;
+    max-width: 520px;
+    margin-bottom: 30px;
+
+    & label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--gray-5);
+      letter-spacing: 0.4px;
+      margin-bottom: 5px;
+
+      & .asterisk {
+        color: #d34e4e;
+      }
+    }
+
+    & input[type='text'] {
+      padding: 12px 16px;
+      font-size: 1rem;
+      border: 1px solid var(--gray-7);
+
+      &:focus {
+        outline: 0;
+        border-color: var(--default-blue);
+      }
+    }
+
+    & input[type='submit'] {
+      font-size: 1.1rem;
+    }
+  }
+}

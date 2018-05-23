@@ -1,0 +1,5 @@
+@import '../_settings';
+
+#p-home {
+  color: var(--gray-5);
+}

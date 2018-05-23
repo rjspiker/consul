@@ -1,0 +1,23 @@
+.g-tag {
+  border: 1px solid var(--black);
+  border-radius: 2px;
+  color: var(--black);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.75em;
+  padding: 4px 10px;
+
+  &:hover {
+    border-color: var(--default-blue);
+  }
+
+  &.selected {
+    color: var(--white);
+    background-color: var(--default-blue);
+    border-color: var(--default-blue);
+  }
+
+  & a {
+    color: inherit;
+  }
+}

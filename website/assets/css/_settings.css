@@ -1,0 +1,44 @@
+:root {
+  /* Typography */
+  --klavika-font: 'klavika-web', Helvetica, sans-serif;
+  --open-sans-font: 'open-sans', 'Open Sans', sans-serif;
+  --monospace-font: 'Fira Mono', monospace;
+  --default-font-size: 16px;
+  --font-weight-reg: 400;
+  --font-weight-bold: 600;
+
+  /* Shades of Gray - Dark to Light */
+  --black: #000000;
+  --gray-1: #191a1c;
+  --gray-2: #323538;
+  --gray-3: #4c4f54;
+  --gray-4: #656a70;
+  --gray-5: #7f858d;
+  --gray-6: #9a9ea5;
+  --gray-7: #b4b8bc;
+  --gray-8: #d0d2d5;
+  --gray-9: #ebecee;
+  --gray-10: #f3f4f6;
+  --white: #ffffff;
+
+  /* Input Field Colors */
+  --input-background-light: #ffffff;
+  --input-background-dark: #1b212d;
+  --input-border-light: var(--gray-7);
+  --input-border-dark: #262e42;
+  --input-placeholder-color: var(--gray-4);
+
+  /* Grid/Layout Settings */
+  --site-max-width: 1288px;
+  --column: 5.46875%;
+  --gutter: 3.125%;
+  --full-column: 8.59375%;
+
+  /* Product Colors */
+  --default-blue: #1563ff;
+  --nomad-green: #00bc7f;
+  --terraform-purple: #5e3aed;
+  --consul-pink: #c62a71;
+  --vault-gray: #7c8797;
+  --packer-blue: #00acff;
+}

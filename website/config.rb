@@ -15,14 +15,14 @@ activate :hashicorp do |h|
 end
 
 # compile js with webpack, css with postcss
-# activate :external_pipeline,
-#   name: 'assets',
-#   command: "cd assets && ./node_modules/.bin/spike #{build? ? :compile : :watch}",
-#   source: 'assets/public'
+activate :external_pipeline,
+  name: 'assets',
+  command: "cd assets && ./node_modules/.bin/spike #{build? ? :compile : :watch}",
+  source: 'assets/public'
 
 # pull site data from datocms
-# activate :dato,
-#   token: '78d2968c99a076419fbb'
+activate :dato,
+  token: '78d2968c99a076419fbb'
 
 helpers do
   # Encodes dato data as base64-minified JSON for compatibility with reshape
@@ -42,15 +42,6 @@ helpers do
     end
   end
 
-  # Returns the FQDN of the image URL.
-  #
-  # @param [String] path
-  #
-  # @return [String]
-  def image_url(path)
-    File.join(base_url, image_path(path))
-  end
-
   # Get the title for the page.
   #
   # @param [Middleman::Page] page
@@ -58,12 +49,12 @@ helpers do
   # @return [String]
   def title_for(page)
     if page && page.metadata
-      return "#{page.metadata[:title]} - Vault by HashiCorp"
+      return "#{page.metadata[:title]} - Consul by HashiCorp"
     elsif page && page.data.page_title
-      return "#{page.data.page_title} - Vault by HashiCorp"
+      return "#{page.data.page_title} - Consul by HashiCorp"
     end
 
-     "Vault by HashiCorp"
+     "Consul by HashiCorp"
   end
 
   # Get the description for the page

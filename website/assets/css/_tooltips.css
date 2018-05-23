@@ -1,0 +1,21 @@
+@import 'tippy.js/dist/tippy.css';
+@import 'tippy.js/dist/themes/light.css';
+
+.tippy-tooltip {
+  border-radius: 0;
+  background: #191a1c;
+  font-size: 0.9em;
+  padding: 10px 20px;
+}
+
+.tippy-popper[x-placement^='top'] .tippy-arrow {
+  border-top-color: #191a1c;
+}
+
+.tippy-popper[x-placement^='bottom'] .tippy-arrow {
+  border-bottom-color: #191a1c;
+}
+
+.tippy-popper {
+  pointer-events: all;
+}

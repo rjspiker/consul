@@ -1,0 +1,14 @@
+/* TODO: this should be refactored and/or removed */
+.g-label {
+  font-family: var(--open-sans-font);
+  font-size: 0.75em;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.2px;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+
+  & span {
+    display: inline-block;
+  }
+}

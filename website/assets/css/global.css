@@ -1,0 +1,17 @@
+/* Global styles shared accross Hashicorp Sites */
+
+/* Variables & extensions */
+@import '_settings';
+@import '_placeholders';
+
+@import '_tooltips';
+@import '_global';
+@import '_typography';
+@import '_tables';
+@import '_code-highlighting';
+@import 'components/_inputs';
+@import 'components/_form';
+@import 'components/_tag';
+@import 'components/_label';
+@import 'components/_section';
+@import 'components/_container';
