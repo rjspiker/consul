@@ -1,0 +1,13 @@
+.bundle
+.cache
+.DS_Store
+.sass-cache
+.env
+build/
+assets/node_modules
+assets/public
+assets/yarn.lock
+assets/package-lock.json
+components/node_modules
+_scripts
+tmp-*

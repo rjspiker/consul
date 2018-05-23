@@ -1,12 +1,37 @@
+require 'base64'
+
 set :base_url, "https://www.consul.io/"
 
+# Middleware for rendering preact components
+use ReshapeMiddleware, component_file: "assets/reshape.js"
+
 activate :hashicorp do |h|
-  h.name        = "consul"
-  h.version     = "1.1.0"
-  h.github_slug = "hashicorp/consul"
+  h.name         = "consul"
+  h.version      = "1.1.0"
+  h.github_slug  = "hashicorp/consul"
+  h.website_root = "website"
+
+  h.releases_enabled = true
 end
 
+# compile js with webpack, css with postcss
+# activate :external_pipeline,
+#   name: 'assets',
+#   command: "cd assets && ./node_modules/.bin/spike #{build? ? :compile : :watch}",
+#   source: 'assets/public'
+
+# pull site data from datocms
+# activate :dato,
+#   token: '78d2968c99a076419fbb'
+
 helpers do
+  # Encodes dato data as base64-minified JSON for compatibility with reshape
+  # components.
+  def encode(data)
+    res = data.is_a?(Array) ? "[#{data.map { |d| d.to_hash.to_json }.join(',')}]" : data.to_hash.to_json
+    Base64.encode64(res).gsub(/\n/, '')
+  end
+
   # Returns a segment tracking ID such that local development is not
   # tracked to production systems.
   def segmentId()
@@ -32,12 +57,14 @@ helpers do
   #
   # @return [String]
   def title_for(page)
-    if page && page.data.page_title
-      return "#{page.data.page_title} - Consul by HashiCorp"
+    if page && page.metadata
+      return "#{page.metadata[:title]} - Vault by HashiCorp"
+    elsif page && page.data.page_title
+      return "#{page.data.page_title} - Vault by HashiCorp"
     end
 
-     "Consul by HashiCorp"
-   end
+     "Vault by HashiCorp"
+  end
 
   # Get the description for the page
   #
@@ -45,7 +72,7 @@ helpers do
   #
   # @return [String]
   def description_for(page)
-    description = (page.data.description || "Consul by HashiCorp")
+    description = (page.data.description || page.metadata[:description] || "Consul by HashiCorp")
       .gsub('"', '')
       .gsub(/\n+/, ' ')
       .squeeze(' ')
@@ -68,13 +95,13 @@ helpers do
   # @return [String]
   def body_id_for(page)
     if !(name = page.data.sidebar_current).blank?
-      return "page-#{name.strip}"
+      return "p-#{name.strip}"
     end
     if page.url == "/" || page.url == "/index.html"
-      return "page-home"
+      return "p-home"
     end
-    if !(title = page.data.page_title).blank?
-      return title
+    if !(title = page.data.page_title || page.metadata[:title]).blank?
+      return "p-" + title
         .downcase
         .gsub('"', '')
         .gsub(/[^\w]+/, '-')
